@@ -28,3 +28,24 @@ footer.site-footer {
         }
     }
 }
+
+
+.totalcount {
+    color: var(--body-text-color);
+    font-weight: normal;
+    //margin-bottom: 5px;
+    }
+
+
+    .running-time {
+        color: var(--body-text-color);
+        font-weight: normal;
+    
+        .running-days {
+            font-weight:bold;
+            color: var(--body-text-color);
+        }   
+    }
+    
+
+

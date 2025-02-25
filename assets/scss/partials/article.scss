@@ -54,7 +54,8 @@
 }
 
 .article-title {
-    font-family: var(--article-font-family);
+    //font-family: var(--article-font-family);
+    font-family: Georgia, serif;
     font-weight: 600;
     margin: 0;
     color: var(--card-text-color-main);
@@ -155,6 +156,16 @@
     box-shadow: var(--shadow-l1);
     background-color: var(--card-background);
     --image-size: 50px;
+
+    .article-subtitle {
+        margin-top: -5px;
+        font-size: 1.5rem;
+    
+        @include respond(md) {
+            font-size: 1.6rem;
+        }
+    }
+    
 
     @include respond(md) {
         --image-size: 60px;

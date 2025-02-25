@@ -1,20 +1,47 @@
 {{- $ThemeVersion := "3.30.0" -}}
 <footer class="site-footer">
     <section class="copyright">
-        &copy; 
+        &copy;
         {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
-            {{ .Site.Params.footer.since }} - 
+        {{ .Site.Params.footer.since }} -
         {{ end }}
         {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
     </section>
+    <section class="totalcount">
+        {{$scratch := newScratch}}
+        {{ range (where .Site.Pages "Kind" "page" )}}
+        {{$scratch.Add "total" .WordCount}}
+        {{ end }}
+        {{ len (where .Site.RegularPages "Section" "post") }} Posts ·
+        {{ div ($scratch.Get "total") 1000.0 | lang.FormatNumber 2 }}k Words
+    </section>
     
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<section class="totalcount">
+    <span id="busuanzi_container_site_uv" class="visitor-item">
+        Total visitors: <span id="busuanzi_value_site_uv"></span>&nbsp&nbsp·&nbsp
+    </span>  
+    <span id="busuanzi_container_site_pv" class="visitor-item">Total views: <span id="busuanzi_value_site_pv"></span></span>  
+</section>
+
+    <!-- Add blog running time -->
+<section class="running-time">
+    This blog has been running stably for
+    <span id="runningdays" class="running-days"></span>
+</section>
     <section class="powerby">
+        <div class="legal-links" >
+            <a href="/privacy-policy/">Privacy Policy</a> · 
+            <a href="/terms-of-service/">Terms of Service</a>
+        </div>
         {{ with .Site.Params.footer.customText }}
-            {{ . | safeHTML }} <br/>
+        {{ . | safeHTML }} <br />
         {{ end }}
 
         {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>` -}}
-        {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
+        {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+                data-version="%s">Stack</a></b>` $ThemeVersion -}}
         {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>` -}}
 
         {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
